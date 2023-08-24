@@ -3,7 +3,7 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/kate-kiz/movie-explorer-back
+Адрес репозитория: https://github.com/kate-kiz/movie-explorer-api
 
 ## Ссылки на проект
 
