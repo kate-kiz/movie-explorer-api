@@ -15,8 +15,10 @@ const { messageError } = require('./errors/errors');
 const { registerValidation, loginValidation } = require('./middlewares/validation');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const { DB_URL, NODE_ENV } = process.env;
+
 const {
-  MONGODB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb',
+  MONGODB_URL = NODE_ENV === 'production' ? DB_URL : 'mongodb://127.0.0.1:27017/bitfilmsdb',
   PORT = 3000 || 4000,
 } = process.env;
 
@@ -75,6 +77,6 @@ app.use(errorLogger);
 app.use(handleErrors);
 
 app.listen(PORT, () => {
-  console.log("Check");
+  console.log('Check');
   console.log(`App listening on port ${PORT}`);
 });
