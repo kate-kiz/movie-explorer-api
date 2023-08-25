@@ -4,6 +4,7 @@ require('dotenv').config();
 const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
+
 const {
   messageError,
   codeCreated,
@@ -22,9 +23,7 @@ const getMyProfile = (req, res, next) => {
         res.send(user);
       }
     })
-    .catch((error) => {
-      next(error);
-    });
+    .catch((error) => next(error));
 };
 
 const createUser = (req, res, next) => {

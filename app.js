@@ -9,9 +9,7 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 require('dotenv').config();
 
-const userRoutes = require('./routes/users');
-const movieRoutes = require('./routes/movies');
-const authRoutes = require('./routes/auth');
+const router = require('./routes/index');
 
 const { auth } = require('./middlewares/auth');
 const { handleErrors } = require('./middlewares/errors');
@@ -86,9 +84,7 @@ app.get('/crash-test', () => {
 
 app.use(auth);
 
-app.use(userRoutes);
-app.use(movieRoutes);
-app.use(authRoutes);
+app.use(router);
 
 app.use(errors());
 

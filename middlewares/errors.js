@@ -5,22 +5,14 @@ const handleErrors = (error, req, res, next) => {
 
   if (error.code === 11000) {
     res.status(codeError.CONFLICT).send({ message: messageError.ConflictError });
-    return;
-  }
-  if (statusCode === codeError.SERVER_ERROR) {
+  } else if (error.code === codeError.SERVER_ERROR) {
     res.status(codeError.SERVER_ERROR).send({ message: messageError.defaultError });
-    return;
+  } else if (error.name === 'ValidationError') {
+    res.status(codeError.BAD_REQUEST).send({ message: messageError.badDataError });
+  } else {
+    res.status(statusCode).send({ message });
   }
-  res.status(statusCode).send({ message });
-
   next();
-  // if (statusCode === codeError.SERVER_ERROR) {
-  //   res.status(statusCode).send({ message: messageError.defaultError });
-  //   return;
-  // }
-  // res.status(statusCode).send({ message });
 };
 
-module.exports = {
-  handleErrors,
-};
+module.exports = handleErrors;
