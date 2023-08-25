@@ -7,10 +7,13 @@ const { JWT_SECRET, NODE_ENV } = process.env;
 const BEARER_PREFIX = 'Bearer ';
 
 const auth = (req, res, next) => {
+  if (!/(https?:\/\/)?(www\.)?.*\/users.*|(https?:\/\/)?(www\.)?.*\/movies.*/.test(req.url)) {
+    return next();
+  }
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith(BEARER_PREFIX)) {
-    next(new UnauthorizedError(messageError.UnauthorizedError));
+    return next(new UnauthorizedError(messageError.UnauthorizedError));
   }
 
   const token = authorization.replace(BEARER_PREFIX, '');

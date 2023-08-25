@@ -1,7 +1,11 @@
-const { router } = require('express').Router();
+const router = require('express').Router();
 
-router.use(require('./movies'));
-router.use(require('./users'));
-router.use(require('./auth'));
+const moviesRoutes = require('./movies');
+const usersRoutes = require('./users');
+const authRoutes = require('./auth');
+
+router.use('/movies', moviesRoutes);
+router.use('/users', usersRoutes);
+router.use('/', authRoutes);
 
 module.exports = router;

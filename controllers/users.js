@@ -9,7 +9,6 @@ const {
   messageError,
   codeCreated,
 } = require('../errors/errors');
-// const { handleErrors } = require('../errors/errors');
 
 const { JWT_SECRET, NODE_ENV } = process.env;
 

@@ -12,7 +12,7 @@ require('dotenv').config();
 const router = require('./routes/index');
 
 const { auth } = require('./middlewares/auth');
-const { handleErrors } = require('./middlewares/errors');
+const handleErrors = require('./middlewares/errors');
 const NotFoundError = require('./errors/NotFoundError');
 const { messageError } = require('./errors/errors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -25,7 +25,7 @@ const limiter = rateLimit({
 
 const { DB_URL, NODE_ENV } = process.env;
 
-const { mongoServerAddress } = util.format(
+const mongoServerAddress = util.format(
   'mongodb://%s:%s/%s',
   config.get('mongo.server.host'),
   config.get('mongo.server.port'),
