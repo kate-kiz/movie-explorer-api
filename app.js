@@ -91,8 +91,8 @@ app.use('/', (req, res, next) => {
 });
 
 app.use(errorLogger);
-app.use(errors());
 app.use(handleErrors);
+app.use(errors());
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

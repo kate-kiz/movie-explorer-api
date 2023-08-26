@@ -1,17 +1,17 @@
-const { codeError, messageError } = require('../errors/errors');
+const { isCelebrateError } = require('celebrate');
+const { messageError } = require('../errors/errors');
 
 const handleErrors = (error, req, res, next) => {
-  const { statusCode = codeError.SERVER_ERROR, message } = error;
-
-  if (error.code === 11000) {
-    res.status(codeError.CONFLICT).send({ message: messageError.ConflictError });
-  } else if (error.code === codeError.SERVER_ERROR) {
-    res.status(codeError.SERVER_ERROR).send({ message: messageError.defaultError });
-  } else if (error.name === 'ValidationError') {
-    res.status(codeError.BAD_REQUEST).send({ message: messageError.badDataError });
+  let statusCode;
+  let message;
+  if (isCelebrateError(error)) {
+    statusCode = 400;
+    message = messageError.badDataError;
   } else {
-    res.status(statusCode).send({ message });
+    statusCode = error.statusCode || 500;
+    message = statusCode === 500 ? 'На сервере произошла ошибка' : error.message;
   }
+  res.status(statusCode).send({ message });
   next();
 };
 
